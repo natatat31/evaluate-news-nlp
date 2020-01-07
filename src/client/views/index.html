@@ -22,10 +22,12 @@
         </header>
 
         <main>
+
+
             <section>
-                <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                <form class="text-input" onsubmit="return Client.apiCall(event)">
+                    <textarea id="article-input" type="text" name="input" placeholder="Test" rows="10" cols="100"></textarea>
+                    <input id="submit" type="submit" name="" value="submit">
                 </form>
             <section>
 
