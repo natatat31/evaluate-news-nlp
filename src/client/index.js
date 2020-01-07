@@ -1,5 +1,5 @@
-import { checkForName } from './js/nameChecker'
-import { handleSubmit } from './js/formHandler'
+// import { checkForName } from './js/nameChecker'
+// import { handleSubmit } from './js/formHandler'
 import { apiCall } from './js/apiCall'
 
 import './styles/resets.scss'
@@ -11,7 +11,7 @@ import './styles/header.scss'
 
 
 export {
-    checkForName,
-    handleSubmit,
+    // checkForName,
+    // handleSubmit,
     apiCall
 }

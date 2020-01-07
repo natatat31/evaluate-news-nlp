@@ -5,9 +5,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // const CustomHtmlReloadPlugin = require('custom-html-reload-plugin')
 // const WorkboxPlugin = require('workbox-webpack-plugin')
 
+
 module.exports = {
     entry: './src/client/index.js',
     output: {
+        // path: path.join(__dirname, "dist"),
+        // filename: "main.[contenthash].js",
+        // publicPath: "/dist"
         libraryTarget: 'var',
         library: 'Client'
     },

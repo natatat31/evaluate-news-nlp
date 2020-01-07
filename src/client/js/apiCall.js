@@ -41,36 +41,63 @@
 // }
 
 
+// document.getElementById('submit').addEventListener('submit', apiCall);
+
+//  function apiCall(event){
+//             event.preventDefault();
+
+//             let textInput = document.getElementById('article-input').value;
+//             console.log(textInput);
+            
+
+//             fetch('/add', {
+//                 method: 'POST',
+//                 headers : new Headers(),
+//                 body:JSON.stringify({
+//                     text: textInput
+//                 })
+//             }).then((res) => res.json())
+//             .then((data) =>  console.log(data))
+//             .catch((err)=>console.log(err))
+//         }
+
+
+
+
+
+const postData = async ( url = '', data)=>{
+
+    let textInput = document.getElementById('article-input').value;
+    console.log(textInput);
+
+    const response = await fetch(url, {
+    method: 'POST', 
+    credentials: 'same-origin', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // body data type must match "Content-Type" header        
+  });
+  try {
+    return textInput;
+  }catch(error) {
+  console.log("error", error)
+  }
+}
+
+
 document.getElementById('submit').addEventListener('submit', apiCall);
 
- function apiCall(event){
-            event.preventDefault();
-
-            let textInput = document.getElementById('article-input').value;
-            console.log(textInput);
-
-            fetch('/add', {
-                method: 'POST',
-                headers : new Headers(),
-                body:JSON.stringify({
-                    text: textInput
-                })
-            }).then((res) => res.json())
-            .then((data) =>  console.log(data))
-            .catch((err)=>console.log(err))
+function apiCall(event) {
+    
+    const textInput = document.getElementById('article-input').value;
+    
+        postData('/add', {
+        text: textInput
         }
+    )
+}
 
-
-
-// function apiCall(event) {
-    
-//     const textInput = document.getElementById('article-input').value;
-    
-//         postData('/add', {
-//         text: textInput
-//         }
-//     )
-// }
 
 
 export { apiCall }
