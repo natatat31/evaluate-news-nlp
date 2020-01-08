@@ -85,6 +85,21 @@ const postData = async ( url = '', data)=>{
   }
 }
 
+const getSentiment = async ()=>{
+    const request = await fetch('/all');
+    try{
+        const newData = await request.json();
+        console.log(newData);
+
+    return newData;
+    }
+    catch(error){
+        console.log("error", error);
+      }
+}
+
+
+
 
 document.getElementById('submit').addEventListener('submit', apiCall);
 
@@ -94,10 +109,14 @@ function apiCall(event) {
     
         postData('/add', {
         text: textInput
-        }
-    )
+        })
+    .then(function(text){
+        getSentiment()
+    })
 }
 
 
 
-export { apiCall }
+export { apiCall,
+         getSentiment
+        }

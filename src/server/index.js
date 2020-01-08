@@ -28,14 +28,14 @@ app.use(express.static('dist'))
 
 // console.log(__dirname)
 
-
 //connect to aylien API
-var AYLIENTextAPI = require("aylien_textapi");
+  var AYLIENTextAPI = require("aylien_textapi");
 
-let textapi = new AYLIENTextAPI({
-    application_id: process.env.API_ID,
-    application_key: process.env.API_KEY
-  });
+  let textapi = new AYLIENTextAPI({
+      application_id: process.env.API_ID,
+      application_key: process.env.API_KEY
+    });
+  
 
 
 const textEntries = [];
@@ -44,25 +44,26 @@ const textEntries = [];
 app.post('/add', addEntry);
 
   function addEntry(req,res){
-    console.log(req.body);
+    // console.log(req.body);
     textEntry = {
         text: req.body.text
     };
   
-    textEntries.push(textEntry);
-    res.send(textEntry)
+    // textEntries.push(textEntry)
+    // console.log(textEntries);
+    // res.send(textEntry)
 
+    textapi.sentiment({
+        'text': textEntry.text,
+        'mode' : 'document'
+      }, function(error, response) {
+        if (error === null) {
+          // console.log(response);
+          textEntries.push(response)
+          console.log(textEntries);
+        }
+      });
   }
-
-
-//   textapi.sentiment({
-//     'text': textInput,
-//     'mode' : 'document'
-//   }, function(error, response) {
-//     if (error === null) {
-//       console.log(response);
-//     }
-//   });
 
 
 
@@ -75,6 +76,9 @@ app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
-})
+
+app.get('/all', getData) 
+function getData (req, res){
+  res.send(textEntries);
+  console.log(textEntries);
+}
