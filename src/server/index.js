@@ -51,7 +51,7 @@ app.post('/add', addEntry);
   
     // textEntries.push(textEntry)
     // console.log(textEntries);
-    // res.send(textEntry)
+
 
     textapi.sentiment({
         'text': textEntry.text,
@@ -60,6 +60,7 @@ app.post('/add', addEntry);
         if (error === null) {
           // console.log(response);
           textEntries.push(response)
+          res.send(response)
           console.log(textEntries);
         }
       });

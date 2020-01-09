@@ -79,19 +79,21 @@ const postData = async ( url = '', data)=>{
     body: JSON.stringify(data), // body data type must match "Content-Type" header        
   });
   try {
-    return textInput;
+    const newData = await response.json();
+    console.log(newData);
+    return newData;
   }catch(error) {
   console.log("error", error)
   }
 }
 
-const getSentiment = async ()=>{
-    const request = await fetch('/all');
+const getSentiment = async (url='')=>{
+    const request = await fetch(url);
     try{
-        const newData = await request.json();
-        console.log(newData);
+        const allData = await request.json();
+        console.log(allData);
 
-    return newData;
+    return allData;
     }
     catch(error){
         console.log("error", error);
@@ -104,15 +106,16 @@ const getSentiment = async ()=>{
 document.getElementById('submit').addEventListener('submit', apiCall);
 
 function apiCall(event) {
-    
+    event.preventDefault()
     const textInput = document.getElementById('article-input').value;
     
         postData('/add', {
         text: textInput
+            }
+        )
+        .then(function(data){
+                getSentiment('/all')
         })
-    .then(function(text){
-        getSentiment()
-    })
 }
 
 
