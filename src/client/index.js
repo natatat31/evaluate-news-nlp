@@ -1,7 +1,7 @@
 // import { checkForName } from './js/nameChecker'
 // import { handleSubmit } from './js/formHandler'
 import { apiCall } from './js/apiCall'
-import { getSentiment } from './js/apiCall'
+// import { getSentiment } from './js/apiCall'
 
 import './styles/resets.scss'
 import './styles/base.scss'
@@ -12,8 +12,6 @@ import './styles/header.scss'
 
 
 export {
-    // checkForName,
-    // handleSubmit,
-    apiCall,
-    getSentiment
+    apiCall
+    // getSentiment
 }

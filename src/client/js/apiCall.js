@@ -1,70 +1,4 @@
 
-//  let form = document.getElementById('form')
-//  let data = {
-//    name : form.elements.name.value,
-//    email : form.elements.email.value,
-//    password : form.elements.password.value
-//  }
-//  form.addEventListener('submit', (e) => {
-//    e.preventDefault()
-//    fetch('http://localhost:3000/register', {
-//      method: 'POST',
-//      body: JSON.stringify(data), 
-//      headers:{
-//        'Content-Type': 'application/json'
-//      }
-//    }).then(res => {
-//      console.log(res) // log response object
-//      return res.json() // return json data from the server
-//    })
-//    .then(response => alert(response.message))
-//    .catch(error => console.error('Error:', error))
-//  })
-
-
-
-// const postData = async (url = '', text = {})=>{
-
-//     const response = await fetch('http://localhost:8080/add', {
-//     method: 'POST', 
-//     headers: {
-//         'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(text), // body data type must match "Content-Type" header        
-//   });
-//   try {
-//     const sentiment = await response();
-//     return sentiment;
-//   }catch(error) {
-//   console.log("error", error)
-//   }
-// }
-
-
-// document.getElementById('submit').addEventListener('submit', apiCall);
-
-//  function apiCall(event){
-//             event.preventDefault();
-
-//             let textInput = document.getElementById('article-input').value;
-//             console.log(textInput);
-            
-
-//             fetch('/add', {
-//                 method: 'POST',
-//                 headers : new Headers(),
-//                 body:JSON.stringify({
-//                     text: textInput
-//                 })
-//             }).then((res) => res.json())
-//             .then((data) =>  console.log(data))
-//             .catch((err)=>console.log(err))
-//         }
-
-
-
-
-
 const postData = async ( url = '', data)=>{
 
     let textInput = document.getElementById('article-input').value;
@@ -81,24 +15,44 @@ const postData = async ( url = '', data)=>{
   try {
     const newData = await response.json();
     console.log(newData);
+    document.getElementById('results').innerHTML = "";
+
+        let entry = document.createElement('div');
+        entry.setAttribute('class', 'entry');
+
+        entry.innerHTML = newData.polarity;
+        document.getElementById('results').append(entry);
+    
     return newData;
   }catch(error) {
   console.log("error", error)
   }
 }
 
-const getSentiment = async (url='')=>{
-    const request = await fetch(url);
-    try{
-        const allData = await request.json();
-        console.log(allData);
+// const getSentiment = async (url='')=>{
+//     const request = await fetch(url);
+//     try{
+//         const allData = await request.json();
+//         console.log(allData);
 
-    return allData;
-    }
-    catch(error){
-        console.log("error", error);
-      }
-}
+//         document.getElementById('results').innerHTML = "";
+
+//         for (let i = allData.length - 1; i >= 0; i--) {
+
+//             let entry = document.createElement('div');
+//             entry.setAttribute('class', 'entry');
+
+//             entry.innerHTML = allData[i].polarity;
+//             document.getElementById('results').append(entry);
+//         }
+         
+
+//     return allData;
+//     }
+//     catch(error){
+//         console.log("error", error);
+//       }
+// }
 
 
 
@@ -106,20 +60,23 @@ const getSentiment = async (url='')=>{
 document.getElementById('submit').addEventListener('submit', apiCall);
 
 function apiCall(event) {
-    event.preventDefault()
+    event.preventDefault();
     const textInput = document.getElementById('article-input').value;
+    if (textInput ===""){
+        //do validation
+    }
     
         postData('/add', {
         text: textInput
             }
         )
-        .then(function(data){
-                getSentiment('/all')
-        })
+        // .then(function(data){
+        //         getSentiment('/all')
+        // })
 }
 
 
 
-export { apiCall,
-         getSentiment
+export { apiCall
+        //  getSentiment
         }

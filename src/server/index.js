@@ -78,8 +78,8 @@ app.listen(8081, function () {
 })
 
 
-app.get('/all', getData) 
-function getData (req, res){
-  res.send(textEntries);
-  console.log(textEntries);
-}
+// app.get('/all', getData) 
+// function getData (req, res){
+//   res.send(textEntries);
+//   console.log(textEntries);
+// }
