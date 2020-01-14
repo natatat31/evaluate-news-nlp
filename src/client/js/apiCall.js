@@ -20,7 +20,11 @@ const postData = async ( url = '', data)=>{
         let entry = document.createElement('div');
         entry.setAttribute('class', 'entry');
 
-        entry.innerHTML = newData.polarity;
+        let confidence = newData.polarity_confidence
+        let percent = confidence * 100;
+        let roundPercent = Math.round(percent);
+
+        entry.innerHTML = 'This text is percieved as <strong>' + newData.polarity + '</strong> with ' + roundPercent + '% confidence';
         document.getElementById('results').append(entry);
     
     return newData;
@@ -29,54 +33,25 @@ const postData = async ( url = '', data)=>{
   }
 }
 
-// const getSentiment = async (url='')=>{
-//     const request = await fetch(url);
-//     try{
-//         const allData = await request.json();
-//         console.log(allData);
-
-//         document.getElementById('results').innerHTML = "";
-
-//         for (let i = allData.length - 1; i >= 0; i--) {
-
-//             let entry = document.createElement('div');
-//             entry.setAttribute('class', 'entry');
-
-//             entry.innerHTML = allData[i].polarity;
-//             document.getElementById('results').append(entry);
-//         }
-         
-
-//     return allData;
-//     }
-//     catch(error){
-//         console.log("error", error);
-//       }
-// }
 
 
-
-
-document.getElementById('submit').addEventListener('submit', apiCall);
 
 function apiCall(event) {
     event.preventDefault();
     const textInput = document.getElementById('article-input').value;
     if (textInput ===""){
-        //do validation
+        let errorMessage = documentFragment.createElement('p');
+        errorMessage.innerHTML = "Please enter in text";
+        document.getElementById('instructions').append(errorMessage);
     }
     
         postData('/add', {
         text: textInput
             }
         )
-        // .then(function(data){
-        //         getSentiment('/all')
-        // })
 }
 
 
 
 export { apiCall
-        //  getSentiment
         }

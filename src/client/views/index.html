@@ -3,43 +3,46 @@
     <head>
         <meta charset="utf-8">
         <title>Test</title>
-        <!-- <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css"> -->
     </head>
 
     <body>
 
         <header>
-            <div class="">
-                Logo
-            </div>
-            <div class="">
-                navigation
-            </div>
+            <div id="header-content"></div>
+                <div class="logo">
+                    Logo
+                </div>
+        </div>
         </header>
 
-        <main>
-
-
-            <section>
-                <form class="text-input" onsubmit="return Client.apiCall(event)">
-                    <textarea id="article-input" type="text" name="input" placeholder="Test" rows="10" cols="100"></textarea>
-                    <input id="submit" type="submit" name="" value="submit">
-                </form>
-            <section>
-
-            <section>
-                <strong>Form Results:</strong>
-                <div id="results"></div>
+            <section id="main">
+                <div id="input">
+                    <div id="instructions">
+                        <h2>Instructions</h2>
+                        <p>Copy and paste an article text in to the area to find out if the sentiment is positive or negative.</p>
+                    </div>
+                    <form class="text-input" onsubmit="return Client.apiCall(event)">
+                        <textarea id="article-input" type="text" name="input" placeholder="Paste Here" rows="20"></textarea>
+                        <input id="submit" type="submit" name="" value="Submit">
+                    </form>
+                </div>
+                <div id="results">
+                </div>
             </section>
-        </main>
 
         <footer>
             <p>This is a footer</p>
         </footer>
+
+      <script>
+            // Check that service workers are supported
+            if ('serviceWorker' in navigator) {
+                // Use the window load event to keep the page load performant
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/service-worker.js');
+                });
+            }
+        </script>
 
     </body>
 </html>
