@@ -39,10 +39,11 @@ const postData = async ( url = '', data)=>{
 function apiCall(event) {
     event.preventDefault();
     const textInput = document.getElementById('article-input').value;
-    if (textInput ===""){
-        let errorMessage = documentFragment.createElement('p');
+    if (textInput === ""){
+        let errorMessage = document.createElement('p');
+        errorMessage.id = "error-flag";
         errorMessage.innerHTML = "Please enter in text";
-        document.getElementById('instructions').append(errorMessage);
+        document.getElementById('text-input').append(errorMessage);
     }
     
         postData('/add', {
